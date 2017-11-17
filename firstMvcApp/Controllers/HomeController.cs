@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using firstMvcApp.Infrastructure;
+
 namespace firstMvcApp.Controllers
 {
     public class HomeController : Controller
@@ -16,7 +17,7 @@ namespace firstMvcApp.Controllers
         }
         public ActionResult Index()
         {
-            return View();
+           return View();
         }
 
         public ActionResult About()
@@ -24,6 +25,7 @@ namespace firstMvcApp.Controllers
             ViewBag.Message = "Your application description page.";
 
             return View();
+
         }
         [Route ("ConnectToUs")] //http://localhost:XXXX/connecttous
         public ActionResult Contact()
