@@ -1,0 +1,79 @@
+﻿@model IEnumerable<firstMvcApp.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitsInStock)
+        </th>
+        <th align="right">
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Discontinued)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitsInStock)
+        </td>
+        <td align="right">
+            @Html.DisplayFor(modelItem => item.UnitPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Discontinued)
+        </td>
+        <td>
+            @Html.EditButtonHelper("Products", "Edit", item.ProductId.ToString())
+
+            @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ProductId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
+        </td>
+    </tr>
+}
+
+</table>*@
+
+@{ 
+    var productGrid = new WebGrid(
+        source: Model,
+        columnNames: new List<string> { "ProductName", "UnitPrice", "UnitsInStock","ProductId" },
+        canPage: true,
+        rowsPerPage: 10
+
+        );
+}
+
+@productGrid.GetHtml(
+    tableStyle: "table table-condensed table-striped table-hover",
+    footerStyle: "pull-right",
+    columns: productGrid.Columns(
+    productGrid.Column(columnName: "ProductName", header: "Product Name"),
+    productGrid.Column(columnName: "UnitPrice", header: "Unit Price"),
+    productGrid.Column(columnName: "UnitsInStock", header: "Stock Level"),
+    productGrid.Column("",
+        format: 
+        @<text> 
+        <a href="/products/Edit/@item.ProductId">Edit</a> 
+        </text>)
+    )
+)

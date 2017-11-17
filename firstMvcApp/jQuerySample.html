@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/jquery-3.2.1.js"></script>
+</head>
+<body>
+    <h2>Working with jQuery</h2>
+    <div id="div1" class="oldStyle">
+        This is a div tag.
+    </div>
+    <div>
+        Another DIV
+    </div>
+    <div>
+        Another DIV2
+    </div>
+    <style>
+        .oldStyle {
+            background: linear-gradient(red, blue);
+            width: 500px;
+            height: 50px;
+        }
+
+        .newStyle {
+            background: linear-gradient(green, white);
+            color: black;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            //alert("Welcome to jQuery");
+            //$("#div1").addClass("newStyle"); // ID Selector
+            //$("div").addClass("newStyle") // Element Selector
+            //$("div:nth-child(even)").addClass("newStyle"); // Pseudo Selectors
+            //$(".oldStyle").removeClass("oldStyle"); // Class Selector
+            var list = ["India", "China", "Spain", "Italy", "Japan", "Egypttt"];
+            //$.each(list, function (index, value) {
+            //    $("<li>" + (index + 1) + "." + value + "</li>").appendTo("#countryList");
+            //});
+            
+            for (var i = 0; i < list.length; i++) {
+                var li = document.createElement("li");
+                li.innerHTML = list[i];
+                document.getElementById("countryList").appendChild(li);
+            }
+
+            // Traditional JavaScript Style of handling events
+            // This kind of coding is what is called UNOBTRUSIVE JS
+            /*var btn = document.getElementById("btn1");
+            btn1.addEventListener("click", function () {
+                document.getElementById("para1").innerHTML = "text added";
+            });*/
+
+            // the above code does not restrict or obstruct the designer from 
+            // modify the html page. These sripts are to be include into the 
+            // .js file and added to the project.
+
+            $("#btn1").click(function () {
+                $("#para1").html("Text addedd via jQuery");
+                $("#countryList").empty();
+            });
+
+        });
+    </script>
+    <ul id="countryList">
+       </ul>
+
+    <button id="btn1"> Click Me</button>
+    <p id="para1"></p>
+</body>
+</html>
